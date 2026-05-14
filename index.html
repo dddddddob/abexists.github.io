@@ -1,0 +1,300 @@
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#fff; color:#111; font-family:'Noto Sans SC', sans-serif; font-size:13px; font-weight:300; }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; justify-content:space-between; align-items:flex-start;
+  padding:20px 24px;
+}
+.nav-logo {
+  font-size:13px; font-weight:400; letter-spacing:0.05em;
+  text-transform:uppercase; cursor:pointer; line-height:1.6;
+}
+.nav-right {
+  text-align:right; line-height:2.0;
+}
+.nav-right a {
+  display:block; font-size:12px; letter-spacing:0.08em;
+  text-transform:uppercase; text-decoration:none;
+  cursor:pointer; transition:opacity 0.15s;
+}
+.nav-right a:hover, .nav-right a.active { opacity:1; }
+
+/* nav colors per page */
+body.on-home nav { background: #111; }
+body.on-home .nav-logo { color: rgba(255,255,255,0.7); }
+body.on-home .nav-right a { color: rgba(255,255,255,0.4); }
+body.on-home .nav-right a:hover,
+body.on-home .nav-right a.active { color: rgba(255,255,255,0.7); }
+
+body.on-work nav { background: #fff; border-bottom: 1px solid #ebebeb; }
+body.on-work .nav-logo { color: #111; }
+body.on-work .nav-right a { color: #aaa; }
+body.on-work .nav-right a:hover,
+body.on-work .nav-right a.active { color: #111; }
+
+body.on-about nav { background: #fff; border-bottom: 1px solid #ebebeb; }
+body.on-about .nav-logo { color: #111; }
+body.on-about .nav-right a { color: #aaa; }
+body.on-about .nav-right a:hover,
+body.on-about .nav-right a.active { color: #111; }
+
+/* ── PAGES ── */
+.page { display:none; }
+.page.active { display:block; }
+
+/* ── HOME — BLACK BG ── */
+#page-home {
+  background: #111;
+  min-height: 100vh;
+  padding: 90px 24px 0;
+  color: rgba(255,255,255,0.7);
+}
+
+.home-intro {
+  padding: 24px 0 52px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 52px;
+}
+.home-intro-title {
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 300; line-height:1.3;
+  letter-spacing:-0.01em;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 16px;
+}
+.home-intro-sub {
+  font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+  color: rgba(255,255,255,0.3); line-height:2;
+}
+
+.clients-label {
+  font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+  color: rgba(255,255,255,0.25); margin-bottom:28px;
+}
+
+/* LOGO WALL */
+.logo-wall {
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-left: 1px solid rgba(255,255,255,0.08);
+}
+.logo-cell {
+  border-right: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  height: 88px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:default;
+  transition: background 0.15s;
+}
+.logo-cell:hover { background: rgba(255,255,255,0.04); }
+.brand-mark {
+  opacity:0.25;
+  transition: opacity 0.2s;
+  display:flex; align-items:center; justify-content:center;
+}
+.logo-cell:hover .brand-mark { opacity:0.65; }
+
+/* svg text fill white for dark bg */
+.logo-cell svg text { fill: #fff; }
+.logo-cell svg circle,
+.logo-cell svg rect,
+.logo-cell svg polygon,
+.logo-cell svg path,
+.logo-cell svg line,
+.logo-cell svg ellipse { stroke: #fff; }
+.logo-cell svg [fill="#111"] { fill: #fff; }
+.logo-cell svg [fill="none"] { fill: none; }
+
+.home-footer {
+  padding: 28px 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display:flex; justify-content:space-between;
+  font-size:10px; letter-spacing:0.1em;
+  text-transform:uppercase; color:rgba(255,255,255,0.2);
+  margin-top: 0;
+}
+
+/* ── WORK ── */
+#page-work { padding-top: 80px; }
+
+.work-header {
+  padding: 20px 24px;
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:1px solid #ebebeb;
+}
+.work-header-title { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#aaa; }
+.work-header-count { font-size:11px; color:#ccc; }
+
+.works-wall {
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top:1px solid #ebebeb;
+  border-left:1px solid #ebebeb;
+}
+.work-tile {
+  border-right:1px solid #ebebeb;
+  border-bottom:1px solid #ebebeb;
+  position:relative; overflow:hidden; cursor:pointer;
+}
+.work-tile-img {
+  width:100%; aspect-ratio:1/1;
+  display:flex; align-items:center; justify-content:center;
+  transition: transform 0.5s ease;
+}
+.work-tile:hover .work-tile-img { transform:scale(1.06); }
+.work-tile-caption {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:10px 12px;
+  background:rgba(255,255,255,0.94);
+  transform:translateY(100%);
+  transition:transform 0.22s ease;
+}
+.work-tile:hover .work-tile-caption { transform:translateY(0); }
+.tile-name { font-size:11px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:2px; }
+.tile-cat { font-size:10px; color:#aaa; letter-spacing:0.05em; text-transform:uppercase; }
+
+.work-footer {
+  padding:28px 24px;
+  border-top:1px solid #ebebeb;
+  display:flex; justify-content:space-between;
+  font-size:10px; letter-spacing:0.1em;
+  text-transform:uppercase; color:#ccc;
+  margin-top:0;
+}
+
+/* ── ABOUT ── */
+#page-about { padding: 100px 24px 60px; }
+.about-title {
+  font-size:32px; font-weight:300; line-height:1.4;
+  letter-spacing:-0.01em; margin-bottom:32px;
+  color:#111;
+}
+.about-body {
+  font-size:13px; font-weight:300; line-height:2.4; color:#888;
+  border-top:1px solid #ebebeb; padding-top:28px;
+  margin-bottom:48px; max-width:480px;
+}
+.about-links { display:flex; gap:28px; }
+.about-link {
+  font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+  color:#aaa; cursor:pointer; transition:color 0.15s;
+  border-bottom:1px solid #ebebeb; padding-bottom:3px;
+}
+.about-link:hover { color:#111; }
+
+.mb { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.mb-t { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; font-family:'Noto Sans SC',sans-serif; font-weight:300; }
+</style>
+
+<nav>
+  <div class="nav-logo" onclick="show('home',null)">Studio<br><span style="font-size:12px;font-weight:300;letter-spacing:0.05em;">品牌视觉设计</span></div>
+  <div class="nav-right">
+    <a class="active" id="nav-home" onclick="show('home',this)">Index</a>
+    <a id="nav-work" onclick="show('work',this)">Work</a>
+    <a id="nav-about" onclick="show('about',this)">Info</a>
+  </div>
+</nav>
+
+<!-- HOME — BLACK -->
+<div class="page active" id="page-home">
+  <div class="home-intro">
+    <div class="home-intro-title">品牌视觉识别<br>设计工作室</div>
+    <div class="home-intro-sub">
+      Brand &amp; Visual Identity Studio<br>
+      上海 &amp; 北京 · 2019 — 2025
+    </div>
+  </div>
+
+  <div class="clients-label">合作客户 Clients 2019 — 2025</div>
+
+  <div class="logo-wall">
+    <div class="logo-cell"><div class="brand-mark"><svg width="72" height="20" viewBox="0 0 72 20" fill="none"><circle cx="10" cy="10" r="8.5" stroke="#fff" stroke-width="1"/><text x="26" y="14" font-family="'Noto Sans SC',sans-serif" font-size="11" letter-spacing="3" fill="#fff">ARCO</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="92" height="22" viewBox="0 0 92 22" fill="none"><path d="M11 2 A9 9 0 1 0 11 20 A6 6 0 1 1 11 2Z" fill="#fff"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="9" letter-spacing="1.5" fill="#fff">PALE MOON</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="60" height="22" viewBox="0 0 60 22" fill="none"><rect x="1" y="7" width="10" height="10" fill="#fff"/><text x="17" y="16" font-family="'Noto Sans SC',sans-serif" font-size="13" fill="#fff">Nori</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="82" height="22" viewBox="0 0 82 22" fill="none"><polygon points="11,2 21,20 1,20" stroke="#fff" stroke-width="1" fill="none"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">FORMA</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="80" height="22" viewBox="0 0 80 22" fill="none"><circle cx="11" cy="11" r="4" fill="#fff"/><circle cx="11" cy="3" r="2.5" fill="#fff" opacity=".35"/><circle cx="11" cy="19" r="2.5" fill="#fff" opacity=".35"/><circle cx="3" cy="11" r="2.5" fill="#fff" opacity=".35"/><circle cx="19" cy="11" r="2.5" fill="#fff" opacity=".35"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">BLOOM</text></svg></div></div>
+
+    <div class="logo-cell"><div class="brand-mark"><svg width="62" height="22" viewBox="0 0 62 22" fill="none"><line x1="1" y1="11" x2="21" y2="11" stroke="#fff" stroke-width="1.2"/><line x1="11" y1="1" x2="11" y2="21" stroke="#fff" stroke-width="1.2"/><text x="28" y="16" font-family="'Noto Sans SC',sans-serif" font-size="12" fill="#fff">Ciel</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="70" height="22" viewBox="0 0 70 22" fill="none"><rect x="1" y="1" width="20" height="20" stroke="#fff" stroke-width="1"/><rect x="6" y="6" width="10" height="10" fill="#fff"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">MIRU</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="70" height="22" viewBox="0 0 70 22" fill="none"><path d="M11 1 L21 11 L11 21 L1 11 Z" stroke="#fff" stroke-width="1"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">KURA</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="82" height="22" viewBox="0 0 82 22" fill="none"><rect x="1" y="8" width="20" height="6" fill="#fff" opacity=".2"/><rect x="1" y="8" width="8" height="6" fill="#fff"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">AURUM</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="70" height="22" viewBox="0 0 70 22" fill="none"><line x1="1" y1="7" x2="21" y2="7" stroke="#fff" stroke-width="1.2"/><line x1="1" y1="11" x2="15" y2="11" stroke="#fff" stroke-width="1.2"/><line x1="1" y1="15" x2="18" y2="15" stroke="#fff" stroke-width="1.2"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">LINEN</text></svg></div></div>
+
+    <div class="logo-cell"><div class="brand-mark"><svg width="72" height="22" viewBox="0 0 72 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="#fff" stroke-width="1"/><circle cx="11" cy="11" r="4" fill="#fff"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">OKEN</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="72" height="22" viewBox="0 0 72 22" fill="none"><path d="M1 20 Q11 1 21 20" stroke="#fff" stroke-width="1.2"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">VOLTA</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="74" height="22" viewBox="0 0 74 22" fill="none"><line x1="1" y1="1" x2="21" y2="21" stroke="#fff" stroke-width="1.2"/><line x1="21" y1="1" x2="1" y2="21" stroke="#fff" stroke-width="1.2"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">CROSS</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="62" height="22" viewBox="0 0 62 22" fill="none"><ellipse cx="11" cy="11" rx="10" ry="6" stroke="#fff" stroke-width="1"/><text x="28" y="16" font-family="'Noto Sans SC',sans-serif" font-size="12" fill="#fff">Élan</text></svg></div></div>
+    <div class="logo-cell"><div class="brand-mark"><svg width="72" height="22" viewBox="0 0 72 22" fill="none"><rect x="1" y="4" width="20" height="14" rx="7" stroke="#fff" stroke-width="1"/><text x="28" y="15" font-family="'Noto Sans SC',sans-serif" font-size="10" letter-spacing="2" fill="#fff">YŌSO</text></svg></div></div>
+  </div>
+
+  <div class="home-footer">
+    <span>© Studio · 品牌视觉设计</span>
+    <span>上海 · 2019—2025</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<div class="page" id="page-work">
+  <div class="work-header">
+    <span class="work-header-title">Work / Selected Projects</span>
+    <span class="work-header-count">10 projects</span>
+  </div>
+  <div class="works-wall">
+    <div class="work-tile"><div class="work-tile-img" style="background:#f5f3ef;"><div class="mb"><div style="width:44px;height:44px;border-radius:50%;border:1px solid #1a1a18;"></div><div class="mb-t" style="color:#1a1a18;">ARCO</div></div></div><div class="work-tile-caption"><div class="tile-name">Arco</div><div class="tile-cat">Brand Identity</div></div></div>
+    <div class="work-tile"><div class="work-tile-img" style="background:#0d0d0d;"><div class="mb"><svg width="26" height="26" viewBox="0 0 28 28"><path d="M14 2 A12 12 0 1 0 14 26 A8 8 0 1 1 14 2Z" fill="#f5f3ef"/></svg><div class="mb-t" style="color:#f5f3ef;">PALE MOON</div></div></div><div class="work-tile-caption"><div class="tile-name">Pale Moon</div><div class="tile-cat">Packaging</div></div></div>
+    <div class="work-tile"><div class="work-tile-img" style="background:#e8e0d0;"><div class="mb"><div style="font-size:30px;font-weight:300;color:#2a1f0f;">Nori</div></div></div><div class="work-tile-caption"><div class="tile-name">Nori</div><div class="tile-cat">Restaurant Brand</div></div></div>
+    <div class="work-tile"><div class="work-tile-img" style="background:#f7f7f5;"><div class="mb"><svg width="32" height="28" viewBox="0 0 36 32" fill="none"><polygon points="18,2 34,30 2,30" stroke="#111" stroke-width="1"/></svg><div class="mb-t" style="color:#111;">FORMA</div></div></div><div class="work-tile-caption"><div class="tile-name">Forma</div><div class="tile-cat">Corporate Identity</div></div></div>
+    <div class="work-tile"><div class="work-tile-img" style="background:#172217;"><div class="mb"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="5" fill="#a8d090"/><circle cx="16" cy="5" r="3.5" fill="#a8d090" opacity=".4"/><circle cx="16" cy="27" r="3.5" fill="#a8d090" opacity=".4"/><circle cx="5" cy="16" r="3.5" fill="#a8d090" opacity=".4"/><circle cx="27" cy="16" r="3.5" fill="#a8d090" opacity=".4"/></svg><div class="mb-t" style="color:#a8d090;">BLOOM</div></div></div><div class="work-tile-caption"><div class="tile-name">Bloom</div><div class="tile-cat">Brand System</div></div></div>
+    <div class="work-tile"><div class="work-tile-img" style="background:#eef0f8;"><div class="mb"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><line x1="2" y1="14" x2="26" y2="14" stroke="#2a3060" stroke-width="1.2"/><line x1="14" y1="2" x2="14" y2="26" stroke="#2a3060" stroke-width="1.2"/></svg><div style="font-size:17px;font-weight:300;color:#2a3060;">Ciel</div></div></div><div class="work-tile-caption"><div class="tile-name">Ciel</div><div class="tile-cat">Luxury Brand</div></div></div>
+    <div class="work-tile"><div class="work-tile-img" style="background:#111;"><div class="mb"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="1" y="1" width="26" height="26" stroke="#fff" stroke-width="1"/><rect x="8" y="8" width="12" height="12" fill="#fff"/></svg><div class="mb-t" style="color:#fff;">MIRU</div></div></div><div class="work-tile-caption"><div class="tile-name">Miru</div><div class="tile-cat">Digital Brand</div></div></div>
+    <div class="work-tile"><div class="work-tile-img" style="background:#f0ece4;"><div class="mb"><svg width="28" height="24" viewBox="0 0 32 28" fill="none"><path d="M16 2 L30 14 L16 26 L2 14 Z" stroke="#5a4a3a" stroke-width="1"/></svg><div class="mb-t" style="color:#5a4a3a;">KURA</div></div></div><div class="work-tile-caption"><div class="tile-name">Kura</div><div class="tile-cat">Lifestyle Brand</div></div></div>
+    <div class="work-tile"><div class="work-tile-img" style="background:#fdf6ee;"><div class="mb"><div style="width:32px;height:32px;background:#c8a97e;"></div><div class="mb-t" style="color:#8a6a3a;">AURUM</div></div></div><div class="work-tile-caption"><div class="tile-name">Aurum</div><div class="tile-cat">Café Brand</div></div></div>
+    <div class="work-tile"><div class="work-tile-img" style="background:#f9f9f9;"><div class="mb"><div style="display:flex;flex-direction:column;gap:5px;"><div style="width:36px;height:1.5px;background:#111;"></div><div style="width:24px;height:1.5px;background:#111;"></div><div style="width:30px;height:1.5px;background:#111;"></div></div><div class="mb-t" style="color:#555;margin-top:6px;">LINEN</div></div></div><div class="work-tile-caption"><div class="tile-name">Linen</div><div class="tile-cat">Fashion Brand</div></div></div>
+  </div>
+  <div class="work-footer">
+    <span>© Studio · 品牌视觉设计</span>
+    <span>2023—2026</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="page-about">
+  <div style="padding:100px 24px 60px; max-width:520px;">
+    <div class="about-title">品牌视觉识别<br>设计工作室</div>
+    <div class="about-body">
+      成立于 2019 年，专注于品牌视觉识别、包装与系统设计。<br>
+      服务新消费品牌、餐饮、时尚与文化机构。<br><br>
+      我们相信，好的品牌设计是一种<br>
+      经得起时间考验的清晰语言。
+    </div>
+    <div class="about-links">
+      <span class="about-link">Behance</span>
+      <span class="about-link">小红书</span>
+      <span class="about-link">Email</span>
+      <span class="about-link">微信</span>
+    </div>
+  </div>
+  <div class="work-footer">
+    <span>© Studio · 品牌视觉设计</span>
+    <span>2023—2026</span>
+  </div>
+</div>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-right a').forEach(a => a.classList.remove('active'));
+  if (el) el.classList.add('active');
+  else document.getElementById('nav-home').classList.add('active');
+  // switch body class for nav color
+  document.body.className = 'on-' + id;
+}
+// init
+document.body.className = 'on-home';
+</script>
